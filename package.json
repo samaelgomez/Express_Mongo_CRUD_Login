@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "node-env-file": "^0.1.8"
+  }
+}
