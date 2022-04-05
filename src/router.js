@@ -5,7 +5,6 @@ const router = express.Router();
 router.use(authRouter);
 
 router.post('/hola', function(req, res) {
-    console.log(req.body);
     res.send("Correcto");
 });
 
