@@ -4,7 +4,7 @@ env(__dirname + '/../.env');
 const app = express()
 const router = require("./router.js")
 const port = process.env.PORT
-// const db = require('./clients/mongo.client')
+require('./clients/mongo.client')
 
 app.use(express.urlencoded({ extended: true }));
 

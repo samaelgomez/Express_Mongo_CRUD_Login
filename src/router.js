@@ -1,11 +1,12 @@
 const express = require('express');
-const authRouter = require('./auth/router');
+const {authRouter, loggedAuthRouter} = require('./auth/router');
+const userRouter = require("./User/model/router");
+const movieRouter = require("./Movie/model/router");
 const router = express.Router();
 
 router.use(authRouter);
-
-router.post('/hola', function(req, res) {
-    res.send("Correcto");
-});
+router.use(userRouter);
+router.use(movieRouter);
+router.use(loggedAuthRouter);
 
 module.exports = router;

@@ -1,15 +1,23 @@
 version: '3.8'
 
 services:
+  app:
+    build: 
+      context: .
+    environment:
+      PORT: 4000
+    ports:
+      - "4000:4000"
+    volumes:
+      - /app/node_modules
+
   mongo:
-      image: mongo:4.0.8
-      restart: always
-      environment:
-        MONGO_INITDB_ROOT_USERNAME: samael
-        MONGO_INITDB_ROOT_PASSWORD: mongopassword
-      ports:
-        - '27017:27017'
-      volumes:
-        - mongo:/var/lib/mongo
-  volumes:
-    mongo: ~
+    image: mongo:4.0.8
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo:/var/lib/mongo
+
+volumes:
+  mongo: ~

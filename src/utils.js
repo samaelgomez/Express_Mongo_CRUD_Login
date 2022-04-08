@@ -1,12 +1,13 @@
 const JWT = require('jsonwebtoken')
 const JWT_HEADER = process.env.JWT_HEADER
 
-function encrypt(payload, header = JWT_HEADER ? JWT_HEADER : "secret") {
+function encrypt(payload, tokenTime = 900, header = JWT_HEADER ? JWT_HEADER : "secret") {
+    console.log(payload);
     if (payload === undefined || payload.length === 0) {
-        throw ("Payload is empty");
+        throw new Error("Payload cannot be empty")
     }
     const token = JWT.sign(payload, header, {
-        expiresIn: 900
+        expiresIn: tokenTime
     });
     return token
 }

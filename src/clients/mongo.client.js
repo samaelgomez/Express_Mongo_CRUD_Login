@@ -1,14 +1,7 @@
 const mongoose = require('mongoose')
-const dbURI = 'mongodb://localhost:27017/bookDb'
+const dbURI = 'mongodb://localhost:27017/crud'
 
-mongoose.connect(dbURI, {useNewUrlParser:true})
-// connect to database
-const db = mongoose.connection
-// if error
-db.on("error", (err) => {
-  console.error(`err: ${err}`)
-})// if connected
-db.on('connected', (err, res) => {
-  console.log('Connected to database')
+mongoose.connect(dbURI)
+.then(() => {
+  console.log("Database connected")
 })
-exports.module = db

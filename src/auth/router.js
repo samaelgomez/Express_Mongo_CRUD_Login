@@ -1,18 +1,20 @@
 const express = require('express');
 const { decrypt } = require('../utils');
-const { login } = require(".");
+const { login, logout } = require(".");
 const authRouter = express.Router();
+const loggedAuthRouter = express.Router();
 
-authRouter.use((req, res, next) => {
+loggedAuthRouter.use((req, res, next) => {
     const token = req.get("Authorization");
-    const username = req.body;
+    const currentUser = req.body.currentUser;
+    console.log(req.body)
     console.log(token);
     if (typeof token != "string") {
         throw "Invalid token.";
     }
     const decryptedData = decrypt(token);
-    console.log({"decryptedUsername":decryptedData.username, "currentUsername":username.username});
-    if (decryptedData.username !== username.username) {
+    console.log({"decryptedUsername":decryptedData.username, "currentUser":currentUser});
+    if (decryptedData.username !== currentUser) {
         throw "Incorrect user.";
     }
     next();
@@ -21,15 +23,13 @@ authRouter.use((req, res, next) => {
 authRouter.post('/login', async function(req, res) {
     const result = await login(req.body);
     console.log({msg: "ok", token: result})
-    res.send("Login correcto");
+    res.send(result);
 });
 
-authRouter.post('/test', async function(req, res) {
-    try {
-        res.send('hola');
-    } catch (error) {
-        console.log(error);
-    }
+authRouter.post('/logout', async function(req, res) {
+    const result = await logout(req.body);
+    console.log({msg: "ok", token: result})
+    res.send(result);
 });
 
-module.exports = authRouter;
+module.exports = {authRouter, loggedAuthRouter};
