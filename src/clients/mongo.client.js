@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const dbURI = 'mongodb://localhost:27017/crud'
+require('dotenv').config({path: "../variables.env"})
+const dbURI = "mongodb://samael:samael@mongo:27017/crud?authSource=admin"
 
 mongoose.connect(dbURI)
 .then(() => {

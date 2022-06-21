@@ -3,7 +3,7 @@ const { loggedAuthRouter } = require('../../auth/router');
 const userRouter = express.Router();
 const { createUser, findAllUsers, findUser, updateUser, deleteUser } = require("./user.model");
 
-loggedAuthRouter.post('/createUser', async function(req, res) {
+userRouter.post('/createUser', async function(req, res) {
     const result = await createUser(req.body.userData);
     res.send(result);
 });

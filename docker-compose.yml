@@ -4,20 +4,29 @@ services:
   app:
     build: 
       context: .
+    container_name: app
     environment:
-      PORT: 4000
+      PORT: 3000
     ports:
-      - "4000:4000"
+      - "3000:3000"
     volumes:
       - /app/node_modules
+    networks:
+      - nodeNetwork
 
   mongo:
-    image: mongo:4.0.8
-    restart: always
-    ports:
-      - '27017:27017'
+    image: mongo:latest
+    container_name: mongo
     volumes:
       - mongo:/var/lib/mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=samael
+      - MONGO_INITDB_ROOT_PASSWORD=samael
+    networks:
+      - nodeNetwork
 
 volumes:
   mongo: ~
+
+networks:
+  nodeNetwork:

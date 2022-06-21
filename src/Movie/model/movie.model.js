@@ -34,6 +34,7 @@ const movieAPI = {
 
     createMovie: async(data)=>{
         try {
+            console.log(data);
             const {id, title, image, description} = data.movieData
             const movies = await movieModel.findOne({
                 id:id,
@@ -73,7 +74,30 @@ const movieAPI = {
         } catch (error) {
            throw error
         }
-        
+    },
+
+    like: async(data)=>{
+        try {
+            const {title} = data.movieData
+            const updateCriteria = {title:title}
+            const updatedData = { $push: { liked_by:data.currentUser.username }}
+            await movieModel.findOneAndUpdate(updateCriteria, updatedData)
+            return true
+        } catch (error) {
+           throw error
+        }
+    },
+
+    unlike: async(data)=>{
+        try {
+            const {title} = data.movieData
+            const updateCriteria = {title:title}
+            const updatedData = { $pull: { liked_by:data.currentUser.username }}
+            await movieModel.findOneAndUpdate(updateCriteria, updatedData)
+            return true
+        } catch (error) {
+           throw error
+        }
     }
 }
 

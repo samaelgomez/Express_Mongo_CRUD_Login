@@ -18,7 +18,7 @@ function decrypt(token) {
         console.log("Error decrypt")
         throw err;
     }
-    console.log(result);
+    console.log(JSON.stringify(result));
     return result;
 }
 

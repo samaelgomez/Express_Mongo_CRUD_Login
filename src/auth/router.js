@@ -7,14 +7,14 @@ const loggedAuthRouter = express.Router();
 loggedAuthRouter.use((req, res, next) => {
     const token = req.get("Authorization");
     const currentUser = req.body.currentUser;
-    console.log(req.body)
     console.log(token);
     if (typeof token != "string") {
         throw "Invalid token.";
     }
     const decryptedData = decrypt(token);
-    console.log({"decryptedUsername":decryptedData.username, "currentUser":currentUser});
-    if (decryptedData.username !== currentUser) {
+    console.log({"decryptedUsername":decryptedData, "currentUser":currentUser});
+    if (decryptedData.username != currentUser.username) {
+        console.log(decryptedData.username + ", " + currentUser.username);
         throw "Incorrect user.";
     }
     next();

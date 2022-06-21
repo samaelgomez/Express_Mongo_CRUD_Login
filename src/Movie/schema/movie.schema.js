@@ -16,7 +16,8 @@ const movieSchema = mongoose.Schema({
     description: {
         type: String,
         required: true
-    }
+    },
+    liked_by: [String]
 })
 
 module.exports = movieSchema;
